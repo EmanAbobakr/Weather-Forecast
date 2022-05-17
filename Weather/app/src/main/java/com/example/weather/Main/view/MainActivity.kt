@@ -1,9 +1,14 @@
 package com.example.weather.Main.view
 
+import android.app.Dialog
+import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -20,6 +25,10 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    val FirstTimePrefs = ""
+
+    lateinit var dialog: Dialog
+
     lateinit var fragmentManager: FragmentManager
     lateinit var homeFragment: HomeFragment
     lateinit var favouriteFragment: FavouriteFragment
@@ -32,6 +41,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //first time checker - to show the dialog
+        var fisrtTimeSharedPreferences: SharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
+        var firstTime = fisrtTimeSharedPreferences.getBoolean("firstTime", true)
+        if(firstTime){
+            dialog = Dialog(this)
+            openDialopg()
+        }
 
         drawerLayout = findViewById(R.id.drawerLayoutId)
         navigationView = findViewById(R.id.navViewId)
@@ -111,5 +128,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         transaction.replace(R.id.fragmentContainerView, settingsFragment!!, "settingFragmentTag")
         //transaction.addToBackStack("settingFragmentTag")
         transaction.commit()
+    }
+
+    fun openDialopg(){
+        dialog.setContentView(R.layout.initial_settings_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        var okBtn : Button = dialog.findViewById(R.id.okBtnId)
+
+        okBtn.setOnClickListener{
+            dialog.dismiss()
+        }
+        dialog.show()
+
+        //change shared prefs
+        var fisrtTimeSharedPreferences: SharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
+        var editor: SharedPreferences.Editor = fisrtTimeSharedPreferences.edit()
+        editor.putBoolean("firstTime", false)
+        editor.apply()
     }
 }

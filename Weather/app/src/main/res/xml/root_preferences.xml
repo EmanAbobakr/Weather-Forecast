@@ -3,7 +3,7 @@
     <PreferenceCategory app:title="@string/language_header">
 
         <ListPreference
-            app:defaultValue="true"
+            app:defaultValue="false"
             app:entries="@array/language_entries"
             app:entryValues="@array/language_values"
             app:key="lang"
@@ -15,7 +15,7 @@
     <PreferenceCategory app:title="@string/location_header">
 
         <ListPreference
-            app:defaultValue="true"
+            app:defaultValue="GPS"
             app:entries="@array/location_entries"
             app:entryValues="@array/location_values"
             app:key="loc"

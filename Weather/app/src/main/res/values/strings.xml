@@ -32,5 +32,11 @@
 
     <!-- Notification Preferences -->
     <string name="notification_title">Alert notification</string>
+    <string name="initialSettings">Initial Settings</string>
+    <string name="location">Location</string>
+    <string name="notificaion">Notification</string>
+    <string name="ok">OK</string>
+    <string name="gps">GPS</string>
+    <string name="map">Map</string>
 
 </resources>
