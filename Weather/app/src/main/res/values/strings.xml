@@ -7,4 +7,30 @@
     <string name="favourite">Favourite</string>
     <string name="alerts">Alerts</string>
     <string name="settings">Settings</string>
+    <!-- for navigation drawer -->
+    <string name="open_navigation_drawer">Open Navigation Drawer</string>
+    <string name="close_navigation_drawer">Close_Navigation_Drawer</string>
+
+    <!--My Preference-->
+
+    <!-- Preference Titles -->
+    <string name="language_header">Language</string>
+    <string name="location_header">Location</string>
+    <string name="units_header">Units</string>
+    <string name="notification_header">Notification</string>
+
+    <!-- Language Preferences -->
+    <string name="language_title">Language</string>
+
+    <!-- Location Preferences -->
+    <string name="location_title">Location</string>
+
+    <!-- Units Preferences -->
+    <string name="units_title">Units</string>
+    <string name="temp_title">Temperature</string>
+    <string name="wind_speed_title">Wind Speed</string>
+
+    <!-- Notification Preferences -->
+    <string name="notification_title">Alert notification</string>
+
 </resources>

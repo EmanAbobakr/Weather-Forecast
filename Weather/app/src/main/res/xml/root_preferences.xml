@@ -1,0 +1,55 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/language_header">
+
+        <ListPreference
+            app:defaultValue="true"
+            app:entries="@array/language_entries"
+            app:entryValues="@array/language_values"
+            app:key="lang"
+            app:title="@string/language_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/location_header">
+
+        <ListPreference
+            app:defaultValue="true"
+            app:entries="@array/location_entries"
+            app:entryValues="@array/location_values"
+            app:key="loc"
+            app:title="@string/location_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/units_header">
+
+        <ListPreference
+            app:defaultValue="true"
+            app:entries="@array/temp_entries"
+            app:entryValues="@array/temp_values"
+            app:key="temp"
+            app:title="@string/temp_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="Meter/Sec"
+            app:entries="@array/wind_entries"
+            app:entryValues="@array/wind_values"
+            app:key="wind_spped"
+            app:title="@string/wind_speed_title"
+            app:useSimpleSummaryProvider="true" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/notification_header">
+
+        <SwitchPreferenceCompat
+            app:key="notification"
+            app:title="@string/notification_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

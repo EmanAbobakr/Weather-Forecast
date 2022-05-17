@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- all you see in the dialog-->
+    <string-array name="language_entries">
+        <item>English</item>
+        <item>Arabic</item>
+    </string-array>
+
+    <!-- what the preference framework interprets the entries as (the saved value)-->
+    <string-array name="language_values">
+        <item>english</item>
+        <item>arabic</item>
+    </string-array>
+
+    <string-array name="location_entries">
+        <item>GPS</item>
+        <item>Map</item>
+    </string-array>
+
+    <string-array name="location_values">
+        <item>gps</item>
+        <item>map</item>
+    </string-array>
+
+    <string-array name="temp_entries">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+
+    <string-array name="temp_values">
+        <item>celsius</item>
+        <item>fahrenheit</item>
+        <item>kelvin</item>
+    </string-array>
+
+    <string-array name="wind_entries">
+        <item>Meter/Sec</item>
+        <item>Miles/Hour</item>
+    </string-array>
+
+    <string-array name="wind_values">
+        <item>meter_sec</item>
+        <item>miles_hour</item>
+    </string-array>
+</resources>
