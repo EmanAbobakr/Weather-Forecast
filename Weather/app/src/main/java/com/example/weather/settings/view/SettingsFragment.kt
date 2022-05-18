@@ -68,70 +68,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
     }
 
     fun updateLanguagePreference(lang: String){
-
-        LocaleManager.setLocale(requireContext())
-
-//
-//        var config : Configuration = requireContext().resources.configuration
-//        var locale = Locale(lang)
-//        Locale.setDefault(locale)
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            config.setLocale(locale)
-//        } else {
-//            config.locale = locale
-//        }
-//
-
-//        val configuration: Configuration = requireContext().resources.configuration
-//        var locale = Locale(language)
-//        Locale.setDefault(locale)
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            configuration.setLocale(locale)
-//        } else {
-//            configuration.locale = locale
-//        }
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            activity?.getApplicationContext()?.createConfigurationContext(configuration);
-//            resources.updateConfiguration(configuration, resources.displayMetrics)
-//        }
-
-//        Log.i("TAG", "updateLanguagePreference: ")
-//        var locale : Locale = Locale("ar")
-//        Locale.setDefault(locale)
-//
-//        var configuration : Configuration = resources.configuration
-//        configuration.setLocale(locale)
-//        configuration.setLayoutDirection(locale)
-
-//        Locale locale = new Locale(language);
-//        Locale.setDefault(locale);
-//
-//        Configuration configuration = context.getResources().getConfiguration();
-//        configuration.setLocale(locale);
-//        configuration.setLayoutDirection(locale);
-
-//        var res : Resources = resources
-//        var dm : DisplayMetrics = res.displayMetrics
-//        var conf : Configuration = res.configuration
-//        conf.locale = Locale("ar")
-//        res.updateConfiguration(conf, dm)
-//        //val refresh = Intent(this, SettingsFragment::class.java)
-//        var refresh = Intent(this, AndroidLocalize::class.java)
-//        startActivity(refresh)
-//        //onConfigurationChanged(conf)
-
-
-//        var myLocale : Locale = Locale("ar")
-//        var res : Resources = resources
-//        var dm : DisplayMetrics = res.displayMetrics
-//        var conf : Configuration = res.configuration
-//        conf.locale = myLocale
-//        res.updateConfiguration(conf, dm)
-//        var refresh: Intent = Intent()
-//        //Intent refresh = new Intent(this, AndroidLocalize.class);
-//        //finish();
-//        startActivity(refresh)
+        //LocaleManager.setLocale(requireContext())
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

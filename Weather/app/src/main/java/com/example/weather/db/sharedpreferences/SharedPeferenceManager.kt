@@ -18,13 +18,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 //
 //}
 
-class SharedPeferenceManager private constructor(context: Context) {
+class SharedPeferenceManager private constructor(var context: Context) {
 
     //private var sharedPreferences: SharedPreferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
     //private var editor: SharedPreferences.Editor = sharedPreferences.edit()
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-    var context = context
 
     companion object{
         private var sharedPrefManger: SharedPeferenceManager? = null

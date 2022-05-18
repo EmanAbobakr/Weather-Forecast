@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
+import android.util.DisplayMetrics
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weather.db.sharedpreferences.SharedPeferenceManager
@@ -14,16 +15,10 @@ import java.util.*
 class LocaleManager {
     companion object{
 
+
         fun setLocale(context: Context){
             update(context, getLanguage(context))
-        }
-
-        fun update(context: Context, language: String){
-            updateResources(context, language)
-            var appContext : Context = context.applicationContext
-            if(context != appContext){
-                updateResources(appContext, language)
-            }
+            //update(context, getLanguage(context))
         }
 
         fun getLanguage(context: Context) : String{
@@ -34,20 +29,42 @@ class LocaleManager {
             return "en"
         }
 
-        @SuppressLint("ObsoleteSdkInt")
-        fun updateResources(context: Context, language: String){
-            var locale : Locale = Locale(language)
-            Locale.setDefault(locale)
-
-            var resources : Resources = context.resources
-            var config : Configuration = Configuration(resources.configuration)
-            if(Build.VERSION.SDK_INT >= 17){
-                config.setLocale(locale)
-            }else{
-                config.locale = locale
-            }
-
-            resources.updateConfiguration(config, resources.displayMetrics)
+        fun update(context: Context, lang: String) {
+            val myLocale = Locale(lang)
+            Locale.setDefault(myLocale)
+            val res: Resources = context.resources
+            val dm: DisplayMetrics = res.displayMetrics
+            val conf: Configuration = res.configuration
+            conf.locale = myLocale
+            conf.setLayoutDirection(myLocale)
+            res.updateConfiguration(conf, dm)
         }
+
+
+//        fun update(context: Context, language: String){
+//            updateResources(context, language)
+//            var appContext : Context = context.applicationContext
+//            if(context != appContext){
+//                updateResources(appContext, language)
+//            }
+//
+//        }
+
+
+//        @SuppressLint("ObsoleteSdkInt")
+//        fun updateResources(context: Context, language: String){
+//            var locale : Locale = Locale(language)
+//            Locale.setDefault(locale)
+//
+//            var resources : Resources = context.resources
+//            var config : Configuration = Configuration(resources.configuration)
+//            if(Build.VERSION.SDK_INT >= 17){
+//                config.setLocale(locale)
+//            }else{
+//                config.locale = locale
+//            }
+//
+//            resources.updateConfiguration(config, resources.displayMetrics)
+//        }
     }
 }

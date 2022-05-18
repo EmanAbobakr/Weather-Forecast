@@ -25,6 +25,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.weather.Main.viewmodel.MainVM
 import com.example.weather.Main.viewmodel.MainVMFactory
+import com.example.weather.Main.viewmodel.weatherrequest.GPSLocation
+import com.example.weather.Main.viewmodel.weatherrequest.WeatherRequest
 import com.example.weather.R
 import com.example.weather.db.LocaleManager
 import com.example.weather.db.room.WeatherLocalDataSource
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var dialog: Dialog
 
     lateinit var fragmentManager: FragmentManager
-    lateinit var homeFragment: HomeFragment
+    var homeFragment: HomeFragment? = null
     lateinit var favouriteFragment: FavouriteFragment
     var settingsFragment: SettingsFragment? = null
 
@@ -57,6 +59,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //hbl
+        var gps = GPSLocation(this, this)
+        Log.i("TAG", "onCreate: GPS Result " + gps.getCoordinates())
 
         //View Model & Factory
         viewModelFactory = MainVMFactory(this)
@@ -69,7 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             dialog = Dialog(this)
             openDialopg()
         }else{
-            LocaleManager.setLocale(applicationContext)
+
+            //LocaleManager.setLocale(this)
         }
 
         drawerLayout = findViewById(R.id.drawerLayoutId)
@@ -106,7 +113,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
 
             R.id.navHomeId -> {
-
+                inflateHomeFragement()
             }
 
             R.id.navFavId -> {
@@ -131,6 +138,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.closeDrawer(GravityCompat.START)
 
         return true
+    }
+
+    fun inflateHomeFragement(){
+        Log.i("TAG", "inflateHomeFragement: ")
+        if(homeFragment == null){
+            homeFragment = HomeFragment()
+        }
+        var transaction : FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainerView, homeFragment!!, "homeFragmentTag")
+        //transaction.addToBackStack("homeFragmentTag")
+        transaction.commit()
     }
 
     fun inflateSettingsFragement(){
