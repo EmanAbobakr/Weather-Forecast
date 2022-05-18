@@ -1,10 +1,11 @@
 <resources>
 
-    <!-- all you see in the dialog-->
+
     <string-array name="language_entries">
         <item>English</item>
         <item>Arabic</item>
     </string-array>
+
 
     <!-- what the preference framework interprets the entries as (the saved value)-->
     <string-array name="language_values">

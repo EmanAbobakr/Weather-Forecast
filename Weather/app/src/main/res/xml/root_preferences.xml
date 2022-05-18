@@ -6,7 +6,7 @@
             app:defaultValue="false"
             app:entries="@array/language_entries"
             app:entryValues="@array/language_values"
-            app:key="lang"
+            app:key="key_lang"
             app:title="@string/language_title"
             app:useSimpleSummaryProvider="true" />
 
@@ -18,7 +18,7 @@
             app:defaultValue="GPS"
             app:entries="@array/location_entries"
             app:entryValues="@array/location_values"
-            app:key="loc"
+            app:key="key_loc"
             app:title="@string/location_title"
             app:useSimpleSummaryProvider="true" />
 
@@ -30,7 +30,7 @@
             app:defaultValue="true"
             app:entries="@array/temp_entries"
             app:entryValues="@array/temp_values"
-            app:key="temp"
+            app:key="key_temp"
             app:title="@string/temp_title"
             app:useSimpleSummaryProvider="true" />
 
@@ -38,7 +38,7 @@
             app:defaultValue="Meter/Sec"
             app:entries="@array/wind_entries"
             app:entryValues="@array/wind_values"
-            app:key="wind_spped"
+            app:key="key_wind_speed"
             app:title="@string/wind_speed_title"
             app:useSimpleSummaryProvider="true" />
 
@@ -48,7 +48,7 @@
     <PreferenceCategory app:title="@string/notification_header">
 
         <SwitchPreferenceCompat
-            app:key="notification"
+            app:key="key_notification"
             app:title="@string/notification_title" />
     </PreferenceCategory>
 

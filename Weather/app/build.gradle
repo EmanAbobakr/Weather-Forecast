@@ -57,6 +57,11 @@ dependencies {
     //Add a Navigation View in the layout
     implementation 'com.google.android.material:material:1.0.0'
 
+//    //Preference Framework
+//    implementation 'com.android.support:preference-v7:28.0.0'
+    implementation 'androidx.preference:preference:1.1.0'
+
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'

@@ -1,4 +1,4 @@
-package com.example.weather.db
+package com.example.weather.db.room
 
 class WeatherLocalDataSource : IWeatherLocalDataSource {
 }

@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">طقس</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="weather">الطقس</string>
+    <string name="home">الرئيسية</string>
+    <string name="favourite">المفضلات</string>
+    <string name="alerts">المنبهات</string>
+    <string name="settings">الاعدادات</string>
+    <!-- for navigation drawer -->
+    <string name="open_navigation_drawer">Open Navigation Drawer</string>
+    <string name="close_navigation_drawer">Close_Navigation_Drawer</string>
+
+    <!--My Preference-->
+
+    <!-- Preference Titles -->
+    <string name="language_header">اللغة</string>
+    <string name="location_header">الموقع</string>
+    <string name="units_header">الوحدات</string>
+    <string name="notification_header">الاشعارات</string>
+
+    <!-- Language Preferences -->
+    <string name="language_title">اللغة</string>
+
+    <!-- Location Preferences -->
+    <string name="location_title">الموقع</string>
+
+    <!-- Units Preferences -->
+    <string name="units_title">الوحدات</string>
+    <string name="temp_title">درجة الحرارة</string>
+    <string name="wind_speed_title">سرعة الرياح</string>
+
+    <!-- Notification Preferences -->
+    <string name="notification_title">اشعار المنبه</string>
+    <string name="initialSettings">الاعدادات الاولية</string>
+    <string name="location">الموقع</string>
+    <string name="notificaion">الاشعارات</string>
+    <string name="ok">حسنا</string>
+    <string name="gps">GPS</string>
+    <string name="map">Map</string>
+
+</resources>

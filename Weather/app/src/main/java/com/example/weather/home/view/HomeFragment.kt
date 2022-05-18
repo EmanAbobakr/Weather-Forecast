@@ -1,28 +1,19 @@
 package com.example.weather.home.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
-import com.example.weather.db.IWeatherLocalDataSource
-import com.example.weather.db.WeatherLocalDataSource
+import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.home.model.*
 import com.example.weather.home.viewmodel.HomeVM
 import com.example.weather.home.viewmodel.HomeVMFactory
-import com.example.weather.network.IRetrofitAPI
-import com.example.weather.network.RetrofitHelper
 import com.example.weather.network.WeatherRemoteDataSource
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class HomeFragment : Fragment() {
@@ -61,7 +52,7 @@ class HomeFragment : Fragment() {
         initUI(view)
 
         //View Model & Factory
-        viewModelFactory = HomeVMFactory(WeatherRepo(view.context, WeatherLocalDataSource(), WeatherRemoteDataSource()))
+        viewModelFactory = HomeVMFactory(WeatherRepo(view.context, WeatherLocalDataSource(), WeatherRemoteDataSource()), view.context)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeVM::class.java)
 
         setUpRecycleViews()

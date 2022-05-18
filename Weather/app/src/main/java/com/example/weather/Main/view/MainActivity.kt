@@ -9,23 +9,36 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Switch
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.weather.Main.viewmodel.MainVM
+import com.example.weather.Main.viewmodel.MainVMFactory
 import com.example.weather.R
+import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.favourite.view.FavouriteFragment
+import com.example.weather.home.model.WeatherRepo
 import com.example.weather.home.view.HomeFragment
+import com.example.weather.home.viewmodel.HomeVM
+import com.example.weather.home.viewmodel.HomeVMFactory
+import com.example.weather.network.WeatherRemoteDataSource
 import com.example.weather.settings.view.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    val FirstTimePrefs = ""
+    lateinit var viewModel: MainVM
+    lateinit var viewModelFactory: MainVMFactory
 
     lateinit var dialog: Dialog
 
@@ -42,12 +55,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.i("TAG", "onCreate: current language " + Locale.getDefault().getLanguage())
+
+        //View Model & Factory
+        viewModelFactory = MainVMFactory(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainVM::class.java)
+
+
+
+
         //first time checker - to show the dialog
         var fisrtTimeSharedPreferences: SharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
         var firstTime = fisrtTimeSharedPreferences.getBoolean("firstTime", true)
         if(firstTime){
             dialog = Dialog(this)
             openDialopg()
+
+            //first openning? set default units in shared preferences
+            //viewModel.setupSettings()
+            //hbl
+            //initialSettings()
         }
 
         drawerLayout = findViewById(R.id.drawerLayoutId)
@@ -67,13 +94,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         fragmentManager = supportFragmentManager
 
-
-//        homeFragment = HomeFragment()
-//        fragmentManager = supportFragmentManager
-//        var transaction : FragmentTransaction = fragmentManager.beginTransaction()
-//        transaction.add(R.id.fragmentContainerView, homeFragment, "homeFragmentTag")
-//        //transaction.addToBackStack("homeFragmentTag")
-//        transaction.commit()
 
     }
 
@@ -134,17 +154,43 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         dialog.setContentView(R.layout.initial_settings_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        var radioGroup : RadioGroup = dialog.findViewById(R.id.locationRadioGroupId)
+        var radioButton : RadioButton
+        var switch : Switch = dialog.findViewById(R.id.notificationSwitchId)
         var okBtn : Button = dialog.findViewById(R.id.okBtnId)
 
+
+
         okBtn.setOnClickListener{
+            radioButton = dialog.findViewById(radioGroup.checkedRadioButtonId)
+            viewModel.setupSettings(radioButton.text.toString(),switch.isChecked)
             dialog.dismiss()
         }
         dialog.show()
 
-        //change shared prefs
+        //change shared preference prefs
         var fisrtTimeSharedPreferences: SharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
-        var editor: SharedPreferences.Editor = fisrtTimeSharedPreferences.edit()
-        editor.putBoolean("firstTime", false)
-        editor.apply()
+        var editor1: SharedPreferences.Editor = fisrtTimeSharedPreferences.edit()
+        editor1.putBoolean("firstTime", false)
+        editor1.apply()
+
     }
+//hbl
+//    fun initialSettings(){
+//        var settingsSharedPreferences: SharedPreferences = getSharedPreferences("com.example.weather_preferences", MODE_PRIVATE)
+//        var editor2: SharedPreferences.Editor = settingsSharedPreferences.edit()
+//
+//        //language
+//        if (Locale.getDefault().getLanguage() == "ar")
+//            editor2.putString("key_lang", "arabic")
+//        else
+//            editor2.putString("key_lang", "english")
+//
+//
+//        //wind spped
+//        //hbl
+//        editor2.putString("key_wind_speed", "miles_hour")
+//
+//        editor2.apply()
+//    }
 }
