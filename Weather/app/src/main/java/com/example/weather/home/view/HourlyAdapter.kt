@@ -37,14 +37,10 @@ class HourlyAdapter (var context: Context, var hourlyData: List<Hourly>) : Recyc
 
     override fun onBindViewHolder(holder: HourlyAdapter.ViewHolder, position: Int) {
         holder.hourText.text = hourlyData.get(position).dt.toString()
-        //holder.hourIcon
-        //var iconURl = "http://openweathermap.org/img/wn/"+hourlyData.get(position).weather.get(0).icon+"@2x.png"
-        //var iconURl = "http://openweathermap.org/img/wn/10d@2x.png"
-
-//        var iconURl = "www.thesportsdb.com/images/icons/sports/soccer.png"
-//        Glide.with(context).load(iconURl)
-//            .apply(RequestOptions().override(200,200))
-//            .into(holder.hourIcon)
+        var iconURl = "https://openweathermap.org/img/wn/"+hourlyData.get(position).weather.get(0).icon+"@2x.png"
+        Glide.with(context).load(iconURl)
+            .apply(RequestOptions().override(200,200))
+            .into(holder.hourIcon)
         holder.hourTemp.text = hourlyData.get(position).temp.toString()
     }
 

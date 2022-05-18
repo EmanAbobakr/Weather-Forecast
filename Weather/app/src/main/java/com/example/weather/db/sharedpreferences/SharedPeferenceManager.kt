@@ -61,13 +61,15 @@ class SharedPeferenceManager private constructor(context: Context) {
         editor.apply()
     }
 
+    fun getStringValue(key: String, defaultValue: String, fileName: String): String {
+        sharedPreferences = context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(key, defaultValue).toString()
+    }
+
     fun getIntValue(key: String, defaultValue: Int): Int {
         return sharedPreferences.getInt(key, defaultValue)
     }
 
-    fun getStringValue(key: String, defaultValue: String): String {
-        return sharedPreferences.getString(key, defaultValue).toString()
-    }
 
     fun getFloatValue(key: String, defaultValue: Float = 0f): Float {
         return sharedPreferences.getFloat(key, defaultValue)

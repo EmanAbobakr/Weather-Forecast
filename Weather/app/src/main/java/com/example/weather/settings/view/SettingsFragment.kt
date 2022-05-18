@@ -3,6 +3,7 @@ package com.example.weather.settings.view
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.weather.R
+import com.example.weather.db.LocaleManager
 import com.example.weather.settings.viewmodel.SettingsVM
 import com.example.weather.settings.viewmodel.SettingsVMFactory
 import java.util.*
@@ -22,8 +24,6 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,8 +34,6 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
         viewModel = ViewModelProvider(this, viewModelFactory).get(SettingsVM::class.java)
 
         setPreferenceChangeListeners()
-
-
 
     }
 
@@ -63,13 +61,40 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
         Log.i("TAG", "onPreferenceChange: value " + newValue.toString())
         when(newValue.toString()){
             //language
-            "english" -> updateLanguagePreference(newValue.toString())
-            "arabic" -> updateLanguagePreference(newValue.toString())
+            "english" -> updateLanguagePreference("en")
+            "arabic" -> updateLanguagePreference("ar")
         }
         return true
     }
 
     fun updateLanguagePreference(lang: String){
+
+        LocaleManager.setLocale(requireContext())
+
+//
+//        var config : Configuration = requireContext().resources.configuration
+//        var locale = Locale(lang)
+//        Locale.setDefault(locale)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            config.setLocale(locale)
+//        } else {
+//            config.locale = locale
+//        }
+//
+
+//        val configuration: Configuration = requireContext().resources.configuration
+//        var locale = Locale(language)
+//        Locale.setDefault(locale)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            configuration.setLocale(locale)
+//        } else {
+//            configuration.locale = locale
+//        }
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            activity?.getApplicationContext()?.createConfigurationContext(configuration);
+//            resources.updateConfiguration(configuration, resources.displayMetrics)
+//        }
 
 //        Log.i("TAG", "updateLanguagePreference: ")
 //        var locale : Locale = Locale("ar")

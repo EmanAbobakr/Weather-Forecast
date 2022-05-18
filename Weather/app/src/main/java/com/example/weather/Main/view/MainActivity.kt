@@ -2,8 +2,10 @@ package com.example.weather.Main.view
 
 import android.app.Dialog
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +16,7 @@ import android.widget.RadioGroup
 import android.widget.Switch
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
@@ -23,6 +26,7 @@ import androidx.navigation.Navigation
 import com.example.weather.Main.viewmodel.MainVM
 import com.example.weather.Main.viewmodel.MainVMFactory
 import com.example.weather.R
+import com.example.weather.db.LocaleManager
 import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.favourite.view.FavouriteFragment
 import com.example.weather.home.model.WeatherRepo
@@ -36,7 +40,6 @@ import com.google.android.material.navigation.NavigationView
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     lateinit var viewModel: MainVM
     lateinit var viewModelFactory: MainVMFactory
 
@@ -55,14 +58,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.i("TAG", "onCreate: current language " + Locale.getDefault().getLanguage())
-
         //View Model & Factory
         viewModelFactory = MainVMFactory(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainVM::class.java)
-
-
-
 
         //first time checker - to show the dialog
         var fisrtTimeSharedPreferences: SharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
@@ -70,11 +68,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(firstTime){
             dialog = Dialog(this)
             openDialopg()
-
-            //first openning? set default units in shared preferences
-            //viewModel.setupSettings()
-            //hbl
-            //initialSettings()
+        }else{
+            LocaleManager.setLocale(applicationContext)
         }
 
         drawerLayout = findViewById(R.id.drawerLayoutId)
@@ -93,7 +88,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setCheckedItem(R.id.navHomeId)
 
         fragmentManager = supportFragmentManager
-
 
     }
 
@@ -159,8 +153,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var switch : Switch = dialog.findViewById(R.id.notificationSwitchId)
         var okBtn : Button = dialog.findViewById(R.id.okBtnId)
 
-
-
         okBtn.setOnClickListener{
             radioButton = dialog.findViewById(radioGroup.checkedRadioButtonId)
             viewModel.setupSettings(radioButton.text.toString(),switch.isChecked)
@@ -175,22 +167,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         editor1.apply()
 
     }
-//hbl
-//    fun initialSettings(){
-//        var settingsSharedPreferences: SharedPreferences = getSharedPreferences("com.example.weather_preferences", MODE_PRIVATE)
-//        var editor2: SharedPreferences.Editor = settingsSharedPreferences.edit()
-//
-//        //language
-//        if (Locale.getDefault().getLanguage() == "ar")
-//            editor2.putString("key_lang", "arabic")
-//        else
-//            editor2.putString("key_lang", "english")
-//
-//
-//        //wind spped
-//        //hbl
-//        editor2.putString("key_wind_speed", "miles_hour")
-//
-//        editor2.apply()
-//    }
 }

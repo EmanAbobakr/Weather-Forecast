@@ -6,40 +6,35 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bottomlayout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/hourlyHourTextId"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="2AM" />
 
-            <TextView
-                android:id="@+id/hourlyHourTextId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:text="2AM" />
+        <ImageView
+            android:id="@+id/hourlyIconId"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            tools:srcCompat="@drawable/ic_favorite_white_24dp" />
 
-            <ImageView
-                android:id="@+id/hourlyIconId"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                tools:srcCompat="@drawable/ic_favorite_white_24dp" />
+        <TextView
+            android:id="@+id/hourlyTempTextId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="13c" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/hourlyTempTextId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:text="13c" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

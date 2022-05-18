@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/drawable/bottomlayout.xml" value="0.20717948717948717" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/drawable/corners_radius.xml" value="0.10555555555555556" />
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/drawable/ic_humidityicon48.xml" value="0.24895833333333334" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_favourite.xml" value="0.18697916666666667" />
-        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home.xml" value="0.13020833333333334" />
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home_daily_row.xml" value="0.1" />
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home_hourly_row.xml" value="0.1" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/initial_settings_dialog.xml" value="0.25" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/main_menu_header.xml" value="0.1" />

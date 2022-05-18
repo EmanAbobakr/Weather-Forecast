@@ -19,7 +19,10 @@
         android:scaleType="centerCrop"
         android:src="@color/black_shade_1" />
 
-    <ScrollView
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width=""-->
+<!--        android:layout_height=""-->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -100,7 +103,153 @@
                 android:id="@+id/dailyRecycleViewId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@drawable/bottomlayout"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/humidityIconId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_humidityicon48"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/humidityInfId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="77%"
+                        android:textColor="#FFFFFF"
+                        tools:text="77%" />
+
+                    <TextView
+                        android:id="@+id/humidityTextId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/humidity"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/windspeedIconId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_windspeedicon48"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/windspeedInfId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="77%"
+                        android:textColor="#FFFFFF"
+                        tools:text="77%" />
+
+                    <TextView
+                        android:id="@+id/windspeedTextId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/windSpeed"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/pressureIconId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_pressureicon48"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/pressureInfId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="77%"
+                        android:textColor="#FFFFFF"
+                        tools:text="77%" />
+
+                    <TextView
+                        android:id="@+id/pressureTextId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/pressure"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/cloudsIconId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_cloudicon48"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/cloudsInfId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="77%"
+                        android:textColor="#FFFFFF"
+                        tools:text="77%" />
+
+                    <TextView
+                        android:id="@+id/cloudTextId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/clouds"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

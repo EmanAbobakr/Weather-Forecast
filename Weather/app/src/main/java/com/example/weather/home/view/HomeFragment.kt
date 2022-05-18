@@ -57,6 +57,8 @@ class HomeFragment : Fragment() {
 
         setUpRecycleViews()
 
+        //viewModel.getWeather()
+
         viewModel.weatherData?.observe(viewLifecycleOwner, {
             weatherData = it
 
@@ -73,7 +75,7 @@ class HomeFragment : Fragment() {
     private fun initUI(view: View){
 
         hourlyRecyclerView = view.findViewById(R.id.hourlyRecycleViewId) as RecyclerView
-        dailyRecyclerView = view.findViewById(R.id.dailyRecycleViewId)
+        dailyRecyclerView = view.findViewById(R.id.dailyRecycleViewId) as RecyclerView
 
         hourlyAdapter = HourlyAdapter(view.context, weatherData?.hourly?: emptyList())
         hourlyRecyclerView.adapter = hourlyAdapter
@@ -88,6 +90,7 @@ class HomeFragment : Fragment() {
 
         layoutManagerV = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         dailyRecyclerView.layoutManager = layoutManagerV
+
     }
 
 
