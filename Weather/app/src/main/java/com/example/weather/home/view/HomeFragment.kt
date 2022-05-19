@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.LocationManager
@@ -26,12 +27,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.weather.Main.view.MainActivity
 import com.example.weather.R
+import com.example.weather.db.LocaleManager
 import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.home.model.*
 import com.example.weather.home.model.weatherrequest.GPSLocation
 import com.example.weather.home.viewmodel.HomeVM
 import com.example.weather.home.viewmodel.HomeVMFactory
+import com.example.weather.map.MapActivity
 import com.example.weather.network.WeatherRemoteDataSource
 import com.google.android.gms.location.*
 import java.text.DateFormat
@@ -147,9 +151,16 @@ class HomeFragment : Fragment() {
             }
         }else{
             //call map code
+            var coordinatesPrefs: SharedPreferences = requireActivity().getSharedPreferences("prefs", AppCompatActivity.MODE_PRIVATE)
+            var lat = coordinatesPrefs.getFloat("lat", 0.0f).toDouble()
+            if(lat == 0.0){
+                var intent : Intent = Intent(requireView().context, MapActivity::class.java)
+                startActivity(intent)
+            }else{
+                var lon = coordinatesPrefs.getFloat("lon", 0.0f).toDouble()
+                viewModel.getWeather(lat, lon)
+            }
         }
-
-
     }
 
     private fun initUI(view: View){
@@ -249,6 +260,8 @@ class HomeFragment : Fragment() {
         var dateFormat : DateFormat = SimpleDateFormat("MMM d")
         return dateFormat.format(date)
     }
+
+    //MAP
 
 
 }
