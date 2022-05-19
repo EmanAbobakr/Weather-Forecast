@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bottomlayout"
+        android:gravity="center"
         android:orientation="horizontal"
+        android:padding="10dp"
         android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,6 +24,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp"
             tools:text="Mon" />
 
         <LinearLayout
@@ -42,6 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:textSize="18sp"
                 tools:text="Clear sky" />
         </LinearLayout>
 
@@ -50,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="18sp"
             tools:text="30/12° C" />
 
     </LinearLayout>

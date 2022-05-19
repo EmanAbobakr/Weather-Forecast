@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -20,6 +21,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.weather.R
 import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.home.model.*
@@ -28,6 +31,9 @@ import com.example.weather.home.viewmodel.HomeVM
 import com.example.weather.home.viewmodel.HomeVMFactory
 import com.example.weather.network.WeatherRemoteDataSource
 import com.google.android.gms.location.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -39,6 +45,13 @@ class HomeFragment : Fragment() {
     lateinit var todayDate: TextView
     lateinit var todayWeatherDesc: TextView
     lateinit var todayTemp: TextView
+    lateinit var currentIcon: ImageView
+
+    lateinit var humidity: TextView
+    lateinit var windSpeed: TextView
+    lateinit var pressure: TextView
+    lateinit var clouds: TextView
+
 
     lateinit var hourlyRecyclerView: RecyclerView
     lateinit var dailyRecyclerView: RecyclerView
@@ -88,11 +101,27 @@ class HomeFragment : Fragment() {
         viewModel.weatherData?.observe(viewLifecycleOwner, {
             weatherData = it
 
+            cityName.text = weatherData?.timezone
+//            todayDate.text = weatherData?.current?.dt.toString()
+            todayDate.text = timeStampToDate(weatherData?.current?.dt!!)
+            todayWeatherDesc.text = weatherData?.current?.weather?.get(0)?.description
+            todayTemp.text = weatherData?.current?.temp.toString()
+
+            var iconURl = "https://openweathermap.org/img/wn/"+weatherData?.current?.weather?.get(0)?.icon+"@2x.png"
+            Glide.with(view.context).load(iconURl)
+                .apply(RequestOptions().override(200,200))
+                .into(currentIcon)
+
             hourlyAdapter.hourlyData = weatherData?.hourly?: emptyList()
             hourlyAdapter.notifyDataSetChanged()
 
             dailyAdapter.dailyData = weatherData?.daily?: emptyList()
             dailyAdapter.notifyDataSetChanged()
+
+            humidity.text = weatherData?.current?.humidity.toString()
+            windSpeed.text = weatherData?.current?.wind_speed.toString()
+            pressure.text = weatherData?.current?.pressure.toString()
+            clouds.text = weatherData?.current?.clouds.toString()
 
             //viewModel.getDateTime(hourlyData.get(0).dt)
         })
@@ -119,6 +148,16 @@ class HomeFragment : Fragment() {
 
     private fun initUI(view: View){
 
+        cityName = view.findViewById(R.id.cityNameId)
+        todayDate = view.findViewById(R.id.todayDateId)
+        todayWeatherDesc = view.findViewById(R.id.todayWeatherId)
+        todayTemp = view.findViewById(R.id.todayTempId)
+        currentIcon = view.findViewById(R.id.currentIconId)
+
+        humidity = view.findViewById(R.id.humidityInfId)
+        windSpeed = view.findViewById(R.id.windspeedInfId)
+        pressure = view.findViewById(R.id.pressureInfId)
+        clouds = view.findViewById(R.id.cloudsInfId)
 
         hourlyRecyclerView = view.findViewById(R.id.hourlyRecycleViewId) as RecyclerView
         dailyRecyclerView = view.findViewById(R.id.dailyRecycleViewId) as RecyclerView
@@ -199,6 +238,11 @@ class HomeFragment : Fragment() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
+    fun timeStampToDate (dt : Long) : String{
+        var date : Date = Date(dt * 1000)
+        var dateFormat : DateFormat = SimpleDateFormat("MMM d")
+        return dateFormat.format(date)
+    }
 
 
 }

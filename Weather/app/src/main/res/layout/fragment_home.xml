@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 tools:text="Cairo Governorate" />
 
             <TextView
@@ -48,49 +49,104 @@
                 android:textColor="@color/white"
                 tools:text="Fri, 12 Feb" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="225dp">
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/bottomlayout"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/todayWeatherId"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:alpha="0.2"
-                    android:background="@color/gray">
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    tools:text="Clear Sky" />
 
-                    <TextView
-                        android:id="@+id/todayWeatherId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        tools:text="Clear Sky" />
-
-                    <TextView
-                        android:id="@+id/todayTempId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="44dp"
-                        tools:text="9C" />
-
-                </RelativeLayout>
+                <TextView
+                    android:id="@+id/todayTempId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="44dp"
+                    tools:text="9C" />
 
                 <ImageView
-                    android:layout_width="150dp"
+                    android:id="@+id/currentIconId"
+                    android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/moon" />
-            </RelativeLayout>
 
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+            </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+<!--            <TextView-->
+<!--                android:id="@+id/cityNameId"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/white"-->
+<!--                tools:text="Cairo Governorate" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/todayDateId"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/white"-->
+<!--                tools:text="Fri, 12 Feb" />-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="225dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="150dp"-->
+<!--                    android:alpha="0.2"-->
+<!--                    android:background="@color/gray">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/todayWeatherId"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        tools:text="Clear Sky" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/todayTempId"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="44dp"-->
+<!--                        tools:text="9C" />-->
+
+<!--                </RelativeLayout>-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/currentIconId"-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="150dp"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:src="@drawable/moon" />-->
+<!--            </RelativeLayout>-->
+
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent" >-->
+
+<!--            </androidx.cardview.widget.CardView>-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hourlyRecycleViewId"
@@ -134,7 +190,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="77%"
                         android:textColor="#FFFFFF"
                         tools:text="77%" />
 
@@ -167,7 +222,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="77%"
                         android:textColor="#FFFFFF"
                         tools:text="77%" />
 
@@ -200,7 +254,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="77%"
                         android:textColor="#FFFFFF"
                         tools:text="77%" />
 
@@ -233,7 +286,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="77%"
                         android:textColor="#FFFFFF"
                         tools:text="77%" />
 

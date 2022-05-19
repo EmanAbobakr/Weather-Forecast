@@ -10,9 +10,9 @@
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_alert.xml" value="0.19270833333333334" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_favourite.xml" value="0.18697916666666667" />
-        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home_daily_row.xml" value="0.1" />
-        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home_hourly_row.xml" value="0.1" />
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home.xml" value="0.152" />
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home_daily_row.xml" value="0.2" />
+        <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_home_hourly_row.xml" value="0.4" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/initial_settings_dialog.xml" value="0.25" />
         <entry key="..\:/ITI/kotlin/project/Weather-Forecast/Weather/app/src/main/res/layout/main_menu_header.xml" value="0.1" />

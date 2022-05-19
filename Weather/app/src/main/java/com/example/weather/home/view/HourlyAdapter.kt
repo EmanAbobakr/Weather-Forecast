@@ -11,6 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.weather.R
 import com.example.weather.home.model.Hourly
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HourlyAdapter (var context: Context, var hourlyData: List<Hourly>) : RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,7 +39,8 @@ class HourlyAdapter (var context: Context, var hourlyData: List<Hourly>) : Recyc
     }
 
     override fun onBindViewHolder(holder: HourlyAdapter.ViewHolder, position: Int) {
-        holder.hourText.text = hourlyData.get(position).dt.toString()
+//        holder.hourText.text = hourlyData.get(position).dt.toString()
+        holder.hourText.text = timeStampToDate(hourlyData.get(position).dt)
         var iconURl = "https://openweathermap.org/img/wn/"+hourlyData.get(position).weather.get(0).icon+"@2x.png"
         Glide.with(context).load(iconURl)
             .apply(RequestOptions().override(200,200))
@@ -52,5 +56,10 @@ class HourlyAdapter (var context: Context, var hourlyData: List<Hourly>) : Recyc
             return 0
     }
 
+    fun timeStampToDate (dt : Long) : String{
+        var date : Date = Date(dt * 1000)
+        var dateFormat : DateFormat = SimpleDateFormat("h a")
+        return dateFormat.format(date)
+    }
 
 }
