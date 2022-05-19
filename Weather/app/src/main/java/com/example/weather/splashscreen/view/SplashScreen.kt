@@ -17,6 +17,7 @@ import com.example.weather.Main.view.MainActivity
 import com.example.weather.Main.viewmodel.MainVM
 import com.example.weather.Main.viewmodel.MainVMFactory
 import com.example.weather.R
+import com.example.weather.db.LocaleManager
 import com.example.weather.splashscreen.viewmodel.SplashScreenVM
 import com.example.weather.splashscreen.viewmodel.SplashScreenVMFactory
 import kotlinx.coroutines.delay
@@ -44,7 +45,7 @@ class SplashScreen : AppCompatActivity() {
             openDialopg()
         }else{
 
-            //LocaleManager.setLocale(this)
+            LocaleManager.setLocale(this)
             val intent : Intent = Intent(this@SplashScreen, MainActivity::class.java)
             startActivity(intent)
         }

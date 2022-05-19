@@ -3,7 +3,9 @@ package com.example.weather.home.view
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
@@ -16,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -132,6 +135,8 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        var fisrtTimeSharedPreferences: SharedPreferences = requireActivity().getSharedPreferences("prefs", AppCompatActivity.MODE_PRIVATE)
+        var firstTime = fisrtTimeSharedPreferences.getBoolean("firstTime", true)
         if (viewModel.isGPS()){
             if(checkPermissions()){
                 if(isLocationEnabled()){
@@ -143,6 +148,7 @@ class HomeFragment : Fragment() {
         }else{
             //call map code
         }
+
 
     }
 

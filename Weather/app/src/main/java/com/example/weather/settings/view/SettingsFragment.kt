@@ -68,7 +68,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
     }
 
     fun updateLanguagePreference(lang: String){
-        //LocaleManager.setLocale(requireContext())
+        LocaleManager.setLocale(requireContext())
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

@@ -39,4 +39,9 @@
     <string name="gps">GPS</string>
     <string name="map">Map</string>
 
+    <string name="humidity">الرطوبة</string>
+    <string name="windSpeed">سرعة الرياح</string>
+    <string name="pressure">الضغط</string>
+    <string name="clouds">السحب</string>
+
 </resources>
