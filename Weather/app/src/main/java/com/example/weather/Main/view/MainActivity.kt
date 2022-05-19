@@ -28,6 +28,7 @@ import com.example.weather.Main.viewmodel.MainVMFactory
 import com.example.weather.Main.viewmodel.weatherrequest.GPSLocation
 import com.example.weather.Main.viewmodel.weatherrequest.WeatherRequest
 import com.example.weather.R
+import com.example.weather.alert.view.AlertFragment
 import com.example.weather.db.LocaleManager
 import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.favourite.view.FavouriteFragment
@@ -45,11 +46,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var viewModel: MainVM
     lateinit var viewModelFactory: MainVMFactory
 
-    lateinit var dialog: Dialog
-
     lateinit var fragmentManager: FragmentManager
+
     var homeFragment: HomeFragment? = null
-    lateinit var favouriteFragment: FavouriteFragment
+    var favouriteFragment: FavouriteFragment? = null
+    var alertFragment: AlertFragment? = null
     var settingsFragment: SettingsFragment? = null
 
     lateinit var drawerLayout: DrawerLayout
@@ -67,17 +68,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //View Model & Factory
         viewModelFactory = MainVMFactory(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainVM::class.java)
-
-        //first time checker - to show the dialog
-        var fisrtTimeSharedPreferences: SharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
-        var firstTime = fisrtTimeSharedPreferences.getBoolean("firstTime", true)
-        if(firstTime){
-            dialog = Dialog(this)
-            openDialopg()
-        }else{
-
-            //LocaleManager.setLocale(this)
-        }
 
         drawerLayout = findViewById(R.id.drawerLayoutId)
         navigationView = findViewById(R.id.navViewId)
@@ -117,17 +107,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.navFavId -> {
-
-                favouriteFragment = FavouriteFragment()
-                var transaction : FragmentTransaction = fragmentManager.beginTransaction()
-                transaction.add(R.id.fragmentContainerView, favouriteFragment, "favFragmentTag")
-                //transaction.addToBackStack("favFragmentTag")
-                transaction.commit()
-
+                inflateFavouriteFragement()
             }
 
             R.id.navAlertId -> {
-
+                inflateAlertFragement()
             }
 
             R.id.nav_setting -> {
@@ -140,6 +124,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+
     fun inflateHomeFragement(){
         Log.i("TAG", "inflateHomeFragement: ")
         if(homeFragment == null){
@@ -148,6 +133,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         var transaction : FragmentTransaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, homeFragment!!, "homeFragmentTag")
         //transaction.addToBackStack("homeFragmentTag")
+        transaction.commit()
+    }
+
+    private fun inflateFavouriteFragement() {
+        Log.i("TAG", "inflateFavFragement: ")
+        if(favouriteFragment == null){
+            favouriteFragment = FavouriteFragment()
+        }
+        var transaction : FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainerView, favouriteFragment!!, "favFragmentTag")
+        //transaction.addToBackStack("favFragmentTag")
+        transaction.commit()
+    }
+
+    private fun inflateAlertFragement() {
+        Log.i("TAG", "inflateAlertFragement: ")
+        if(alertFragment == null){
+            alertFragment = AlertFragment()
+        }
+        var transaction : FragmentTransaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainerView, alertFragment!!, "alertFragmentTag")
+        //transaction.addToBackStack("alertFragmentTag")
         transaction.commit()
     }
 
@@ -162,27 +169,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         transaction.commit()
     }
 
-    fun openDialopg(){
-        dialog.setContentView(R.layout.initial_settings_dialog)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        var radioGroup : RadioGroup = dialog.findViewById(R.id.locationRadioGroupId)
-        var radioButton : RadioButton
-        var switch : Switch = dialog.findViewById(R.id.notificationSwitchId)
-        var okBtn : Button = dialog.findViewById(R.id.okBtnId)
-
-        okBtn.setOnClickListener{
-            radioButton = dialog.findViewById(radioGroup.checkedRadioButtonId)
-            viewModel.setupSettings(radioButton.text.toString(),switch.isChecked)
-            dialog.dismiss()
-        }
-        dialog.show()
-
-        //change shared preference prefs
-        var fisrtTimeSharedPreferences: SharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE)
-        var editor1: SharedPreferences.Editor = fisrtTimeSharedPreferences.edit()
-        editor1.putBoolean("firstTime", false)
-        editor1.apply()
-
-    }
 }

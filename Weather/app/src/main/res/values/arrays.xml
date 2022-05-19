@@ -9,8 +9,8 @@
 
     <!-- what the preference framework interprets the entries as (the saved value)-->
     <string-array name="language_values">
-        <item>english</item>
-        <item>arabic</item>
+        <item>en</item>
+        <item>ar</item>
     </string-array>
 
     <string-array name="location_entries">

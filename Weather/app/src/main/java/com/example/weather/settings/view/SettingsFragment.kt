@@ -61,8 +61,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
         Log.i("TAG", "onPreferenceChange: value " + newValue.toString())
         when(newValue.toString()){
             //language
-            "english" -> updateLanguagePreference("en")
-            "arabic" -> updateLanguagePreference("ar")
+            "en" -> updateLanguagePreference("en")
+            "ar" -> updateLanguagePreference("ar")
         }
         return true
     }

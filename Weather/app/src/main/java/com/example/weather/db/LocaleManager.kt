@@ -22,9 +22,9 @@ class LocaleManager {
         }
 
         fun getLanguage(context: Context) : String{
-            var lang = SharedPeferenceManager.getInstance(context).getStringValue("key_lang", "english", "com.example.weather_preferences")
+            var lang = SharedPeferenceManager.getInstance(context).getStringValue("key_lang", "en", "com.example.weather_preferences")
             Log.i("TAG", "getLanguage: lang" + lang)
-            if(lang == "arabic")
+            if(lang == "ar")
                 return "ar"
             return "en"
         }
