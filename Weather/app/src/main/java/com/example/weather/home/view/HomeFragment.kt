@@ -1,25 +1,44 @@
 package com.example.weather.home.view
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.home.model.*
+import com.example.weather.home.model.weatherrequest.GPSLocation
 import com.example.weather.home.viewmodel.HomeVM
 import com.example.weather.home.viewmodel.HomeVMFactory
 import com.example.weather.network.WeatherRemoteDataSource
+import com.google.android.gms.location.*
 
 
 class HomeFragment : Fragment() {
 
     lateinit var viewModel: HomeVM
     lateinit var viewModelFactory: HomeVMFactory
+
+    lateinit var cityName: TextView
+    lateinit var todayDate: TextView
+    lateinit var todayWeatherDesc: TextView
+    lateinit var todayTemp: TextView
 
     lateinit var hourlyRecyclerView: RecyclerView
     lateinit var dailyRecyclerView: RecyclerView
@@ -32,6 +51,11 @@ class HomeFragment : Fragment() {
 
     lateinit var hourlyAdapter: HourlyAdapter
     lateinit var dailyAdapter: DailyAdapter
+
+    //GPS
+    lateinit var  mFucedLocationClient: FusedLocationProviderClient
+    var PERMISSION_ID = 44
+    var coordinatesValues: MutableLiveData<List<Double>> = MutableLiveData<List<Double>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +72,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mFucedLocationClient = LocationServices.getFusedLocationProviderClient(view.context);
 
         initUI(view)
 
@@ -70,9 +96,29 @@ class HomeFragment : Fragment() {
 
             //viewModel.getDateTime(hourlyData.get(0).dt)
         })
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (viewModel.isGPS()){
+            if(checkPermissions()){
+                if(isLocationEnabled()){
+                    requestNewLocationData()
+                }
+            }else{
+                requestPermissions()
+            }
+        }else{
+            //call map code
+        }
+
     }
 
     private fun initUI(view: View){
+
 
         hourlyRecyclerView = view.findViewById(R.id.hourlyRecycleViewId) as RecyclerView
         dailyRecyclerView = view.findViewById(R.id.dailyRecycleViewId) as RecyclerView
@@ -92,6 +138,67 @@ class HomeFragment : Fragment() {
         dailyRecyclerView.layoutManager = layoutManagerV
 
     }
+
+
+    //GPS
+    @SuppressLint("MissingPermission")
+    fun requestNewLocationData(){
+
+        Log.i("TAG", "requestNewLocationData: ")
+        var mLocationRequest : LocationRequest = LocationRequest.create()
+
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(5);
+        mLocationRequest.setFastestInterval(0);
+        mLocationRequest.setNumUpdates(1);
+
+        mFucedLocationClient = LocationServices.getFusedLocationProviderClient(requireView().context);
+        mFucedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper()!!);
+    }
+
+    private val mLocationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            Log.i("TAG", "onLocationResult: ")
+            super.onLocationResult(locationResult)
+            val mLastLocation = locationResult.lastLocation
+
+            Log.i("TAG", "onLocationResult: ${mLastLocation.latitude} and ${mLastLocation.longitude}")
+            viewModel.getWeather(mLastLocation.latitude, mLastLocation.longitude)
+        }
+    }
+
+
+    private fun checkPermissions(): Boolean {
+        Log.i("TAG", "checkPermissions: ")
+        return ActivityCompat.checkSelfPermission(
+            requireView().context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(
+                    requireView().context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) ==
+                PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestPermissions() {
+        Log.i("TAG", "requestPermissions: ")
+        ActivityCompat.requestPermissions(
+            requireActivity(), arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            PERMISSION_ID
+        )
+
+    }
+
+    fun isLocationEnabled(): Boolean{
+        var locationManager: LocationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
 
 
 }

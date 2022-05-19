@@ -1,46 +1,25 @@
 package com.example.weather.Main.view
 
-import android.app.Dialog
-import android.content.SharedPreferences
-import android.content.res.Configuration
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Switch
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import com.example.weather.Main.viewmodel.MainVM
 import com.example.weather.Main.viewmodel.MainVMFactory
-import com.example.weather.Main.viewmodel.weatherrequest.GPSLocation
-import com.example.weather.Main.viewmodel.weatherrequest.WeatherRequest
+import com.example.weather.home.model.weatherrequest.GPSLocation
 import com.example.weather.R
 import com.example.weather.alert.view.AlertFragment
-import com.example.weather.db.LocaleManager
-import com.example.weather.db.room.WeatherLocalDataSource
 import com.example.weather.favourite.view.FavouriteFragment
-import com.example.weather.home.model.WeatherRepo
 import com.example.weather.home.view.HomeFragment
-import com.example.weather.home.viewmodel.HomeVM
-import com.example.weather.home.viewmodel.HomeVMFactory
-import com.example.weather.network.WeatherRemoteDataSource
 import com.example.weather.settings.view.SettingsFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var viewModel: MainVM
@@ -61,9 +40,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //hbl
-        var gps = GPSLocation(this, this)
-        Log.i("TAG", "onCreate: GPS Result " + gps.getCoordinates())
 
         //View Model & Factory
         viewModelFactory = MainVMFactory(this)

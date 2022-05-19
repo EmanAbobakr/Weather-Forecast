@@ -1,6 +1,8 @@
 package com.example.weather.home.viewmodel
 
+import android.app.Activity
 import android.content.Context
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.weather.home.model.IWeatherRepo
